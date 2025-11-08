@@ -4,8 +4,8 @@
  * `TNamespace` (from generated/types.ts) is a static union primarily optimized for editor
  * autocomplete and quick TS performance. After refactors (e.g. renaming a screen), it may
  * temporarily contain stale items until the developer runs:
- *   1) `smart-i18n clean-translations`
- *   2) `smart-i18n` (to regenerate namespaces and types)
+ *   1) `smart-i18n-i18n clean-translations`
+ *   2) `smart-i18n-i18n` (to regenerate namespaces and types)
  *
  * `NAMESPACES` (from generated/namespaces.ts) is the runtime source of truth
  * for currently valid namespaces discovered in the codebase.
