@@ -1,0 +1,66 @@
+# --- 1. Dependencies (Тәуелділіктер) ---
+# pnpm-нің негізгі node_modules папкасы (ең маңыздысы)
+/node_modules/
+
+# pnpm логтары
+.pnpm-debug.log
+
+# Кейде пакеттер ішінде де node_modules пайда болуы мүмкін
+packages/*/node_modules/
+apps/*/node_modules/
+
+
+# --- 2. Secrets (Құпия сөздер) ---
+# .env файлдарының ЕШҚАЙСЫСЫН git-ке қоспау
+.env
+.env.*
+.env.local
+.env.development.local
+.env.production.local
+
+# Бірақ .env.example файлдарын қосуға рұқсат ету
+!.env.example
+!.env.example.*
+
+
+# --- 3. Build Artifacts (Жинақталған файлдар) ---
+
+# Next.js (apps/web-next16)
+apps/*/.next/
+apps/*/out/
+
+# Кітапхана (packages/react-query-conditional)
+# tsup жинақтайтын 'dist' папкасы
+packages/*/dist/
+
+# TypeScript-тің кэш файлдары
+*.tsbuildinfo
+
+# Monorepo кэші (TurboRepo, etc.)
+.turbo/
+
+
+# --- 4. IDE & Editor ---
+# VSCode
+.vscode/
+
+# JetBrains (WebStorm, IntelliJ)
+.idea/
+
+
+# --- 5. OS Specific (Операциялық жүйе файлдары) ---
+# macOS
+.DS_Store
+.AppleDouble
+
+# Windows
+Thumbs.db
+desktop.ini
+
+
+# --- 6. Logs (Логтар) ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*

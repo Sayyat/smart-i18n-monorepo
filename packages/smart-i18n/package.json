@@ -1,0 +1,66 @@
+{
+  "name": "@sayyyat/smart-i18n",
+  "version": "2.2.7",
+  "description": "Reusable Gulp-based i18n automation system for javascript/typescript projects.",
+  "main": "./gulpfile.mjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./gulpfile.mjs"
+    },
+    "./lib": "./lib/index.js"
+  },
+  "bin": "./bin/smart-i18n.mjs",
+  "files": [
+    "bin/",
+    "lib/",
+    "src/",
+    "tasks/",
+    ".demo-env",
+    "gulpfile.js",
+    "i18next.config.json",
+    "README.md"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node -e \"console.log('No tests yet.')\"",
+    "release": "node ./release.mjs"
+  },
+  "keywords": [
+    "i18n",
+    "nextjs",
+    "gulp",
+    "translation",
+    "automation"
+  ],
+  "author": "Sayat Raykul",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sayyat/smart-i18n.git"
+  },
+  "homepage": "https://github.com/Sayyat/smart-i18n#readme",
+  "bugs": {
+    "url": "https://github.com/Sayyat/smart-i18n/issues"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "dotenv": "^17.2.2",
+    "eol": "^0.10.0",
+    "glob": "^11.0.3",
+    "gulp": "^5.0.1",
+    "i18next-scanner": "^4.6.0",
+    "minimatch": "^10.0.3",
+    "node-fetch": "^3.3.2",
+    "vinyl": "^3.0.1",
+    "yargs": "^18.0.0"
+  },
+  "engines": {
+    "node": ">=20",
+    "npm": ">=9"
+  },
+  "packageManager": "pnpm@10.20.0"
+}

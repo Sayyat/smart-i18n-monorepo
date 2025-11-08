@@ -1,0 +1,14 @@
+{
+  "name": "smart-i18n-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo for Smart I18n packages and applications",
+  "main": "index.js",
+  "scripts": {
+    "release": "node ./release.mjs",
+    "test": "echo \"Running root test script (if any)...\" && exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0"
+}
