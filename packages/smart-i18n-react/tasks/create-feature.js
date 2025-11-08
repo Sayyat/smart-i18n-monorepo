@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { generateFeatureStructure } from "../lib/feature.js";

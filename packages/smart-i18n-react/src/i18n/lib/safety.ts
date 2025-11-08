@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 
 import { i18n, TFunction } from "i18next";
 

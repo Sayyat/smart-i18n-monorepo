@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
-
 /**
  * smart-i18n tolerance mode
  * -------------------------
@@ -36,94 +32,95 @@ import fs from "fs/promises";
 import path from "path";
 
 export async function getUserLanguage(): Promise<TLanguage> {
-    return (
-        ((await cookies()).get(COOKIE_NAME)?.value as TLanguage) ||
-        FALLBACK_LANGUAGE
-    );
+	return (
+		((await cookies()).get(COOKIE_NAME)?.value as TLanguage) ||
+		FALLBACK_LANGUAGE
+	);
 }
 
 // Known namespaces at runtime (from generated/namespaces.ts)
 type TKnownNamespace = (typeof NAMESPACES)[number];
 
 const isKnownNamespace = (ns: string): ns is TKnownNamespace =>
-    (NAMESPACES as readonly string[]).includes(ns);
+	(NAMESPACES as readonly string[]).includes(ns);
 
 const pickFallbackNamespace = (): TKnownNamespace =>
-    (NAMESPACES.includes("common" as any) ? "common" : NAMESPACES[0]) as TKnownNamespace;
+	(NAMESPACES.includes("common" as any) ? "common" : NAMESPACES[0]) as TKnownNamespace;
 
 const warnStaleNamespace = (ns: string, chosen: TKnownNamespace) => {
-    if (process.env.NODE_ENV !== "production") {
-        console.warn(
-            `[smart-i18n] Unknown namespace "${ns}". Using "${chosen}" instead. ` +
-            `Tip: run "smart-i18n clean-translations" then "smart-i18n" to remove stale files and refresh types.`
-        );
-    }
+	if (process.env.NODE_ENV !== "production") {
+		console.warn(
+			`[smart-i18n] Unknown namespace "${ns}". Using "${chosen}" instead. ` +
+			`Tip: run "smart-i18n clean-translations" then "smart-i18n" to remove stale files and refresh types.`
+		);
+	}
 };
 
 export async function loadNamespace(
-    lng: string,
-    ns: string
+	lng: string,
+	ns: string
 ): Promise<Record<string, any>> {
-    const filePath = path.resolve(process.cwd(), "src/i18n/locales", lng, `${ns}.json`);
-    try {
-        const file = await fs.readFile(filePath, "utf-8");
-        return JSON.parse(file);
-    } catch {
-        return {};
-    }
+	const filePath = path.resolve(process.cwd(), "src/i18n/locales", lng, `${ns}.json`);
+	try {
+		const file = await fs.readFile(filePath, "utf-8");
+		return JSON.parse(file);
+	} catch {
+		return {};
+	}
 }
 
 async function initI18nextOnce(lng: string, ns: string) {
-    const translations = await loadNamespace(lng, ns);
-    return createInstance(
-        {
-            lng,
-            fallbackLng: "en",
-            ns: [ns],
-            defaultNS: ns,
-            resources: {
-                [lng]: {
-                    [ns]: translations,
-                },
-            },
-            returnNull: false,
-            returnEmptyString: true,
-            returnObjects: false,
-            nsSeparator: ".",
-            keySeparator: ".",
-            load: "languageOnly",
-        },
-        () => {
-        }
-    );
+	const translations = await loadNamespace(lng, ns);
+	return createInstance(
+		{
+			lng,
+			fallbackLng: "en",
+			ns: [ns],
+			defaultNS: ns,
+			resources: {
+				[lng]: {
+					[ns]: translations,
+				},
+			},
+			returnNull: false,
+			returnEmptyString: true,
+			returnObjects: false,
+			nsSeparator: ".",
+			keySeparator: ".",
+			load: "languageOnly",
+		},
+		() => {
+		}
+	);
 }
 
 // Overloads preserve strong typing for valid `TNamespace`,
 // and gracefully degrade to a permissive `(key: string) => string` otherwise.
 export async function getTranslation<N extends TNamespace>(
-    ns: N
+	ns: N
 ): Promise<{
-    t: <K extends TNamespaceTranslationKeys[N]>(
-        key: K,
-        options?: Record<string, unknown>
-    ) => string;
+	t: <K extends TNamespaceTranslationKeys[N]>(
+		key: K,
+		options?: Record<string, unknown>
+	) => string;
 }>;
+
 export async function getTranslation(
-    ns: string
+	ns: string
 ): Promise<{ t: (key: string, options?: Record<string, unknown>) => string }>;
 export async function getTranslation(ns: string) {
-    const language = await getUserLanguage();
+	const language = await getUserLanguage();
 
-    let effectiveNs: string = ns;
-    if (!isKnownNamespace(ns)) {
-        const fallback = pickFallbackNamespace();
-        warnStaleNamespace(ns, fallback);
-        effectiveNs = fallback;
-    }
+	let effectiveNs: string = ns;
+	if (!isKnownNamespace(ns)) {
+		const fallback = pickFallbackNamespace();
+		warnStaleNamespace(ns, fallback);
+		effectiveNs = fallback;
+	}
 
-    const i18nextInstance = await initI18nextOnce(language, effectiveNs);
-    const rawT = i18nextInstance.getFixedT(language, effectiveNs);
-    const t = safeT(rawT);
+	const i18nextInstance = await initI18nextOnce(language, effectiveNs);
+	const rawT = i18nextInstance.getFixedT(language, effectiveNs);
+	const t = safeT(rawT);
 
-    return {t} as any;
+	return {t} as any;
 }

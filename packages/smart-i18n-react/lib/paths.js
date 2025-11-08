@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 import {findLibraryRoot} from "@sayyyat/smart-i18n/lib";
 import path from "path";
 

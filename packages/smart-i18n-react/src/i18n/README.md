@@ -20,7 +20,7 @@ Here is the layout of the **i18n** system files:
 src/
 ├── i18n/
 │   ├── generated/          // Generated files for namespaces and translation types
-│   │   ├── index.ts.       // public api
+│   │   ├── index.ts        // public api
 │   │   ├── namespaces.ts   // Client-side i18next initialization
 │   │   └── types.ts        // Type-safe wrapper for translation functions
 │   ├── lib/
@@ -31,7 +31,9 @@ src/
 │   ├── locales/            // Translation files per language (JSON)
 │   ├── types/
 │   │   └── i18n.ts         // Type definitions for translation functions
-│   └── index.ts            // Exports i18n utilities for the project
+│   ├── client.ts           // Exports client side i18n utilities for the project
+│   ├── index.ts            // Exports common i18n utilities for the project
+│   └── server.ts           // Exports server side i18n utilities for the project
 ```
 
 ---
@@ -50,10 +52,19 @@ exports the following:
 * **`NAMESPACES`**: A constant that holds the namespaces used in the translation files.
 
 ```ts
-export {useTranslation, default as i18n} from "./lib/client";
-export {getTranslation} from "./lib/server";
-export {languages, FALLBACK_LANGUAGE, type TLanguage} from "./lib/config";
-export {NAMESPACES} from "./generated/namespaces";
+export {
+    NAMESPACES,
+    type TNamespace,
+    type TNamespaceTranslationKeys,
+    type TAllTranslationKeys,
+} from "./generated";
+export type {TFunction} from "./types/i18n";
+export {
+    languages,
+    FALLBACK_LANGUAGE,
+    defaultNS,
+    type TLanguage,
+} from "./lib/config";
 ```
 
 ---
@@ -78,7 +89,7 @@ i18next
             return import(`@/i18n/locales/${language}/${namespace}.json`);
         })
     )
-    .init(baseInitOptions);
+    .init({...});
 ```
 
 The **`useTranslation`** function is typed to ensure that developers can only access the correct translation keys for
@@ -114,10 +125,8 @@ inside components or server-side code, the translation keys are validated and su
 **Key Code Example**:
 
 ```ts
-export function safeT<T extends TNamespace>(rawT: any, namespace: T) {
-    return (key: TNamespaceTranslationKeys[T], options?: Record<string, unknown>) => {
-        return rawT(key, options); // Ensure strict typing on key
-    };
+export function safeT(t: i18n["t"]): TFunction {
+   ...
 }
 ```
 
@@ -186,16 +195,6 @@ experience and reducing potential bugs.
 ## Conclusion
 
 The **i18n system** in this project is designed to be scalable, maintainable, and type-safe. With **i18next**, *
-*TypeScript**, and custom utilities like `createStrictT`, the system provides a powerful and developer-friendly
+*TypeScript**, and custom utilities like `safeT`, the system provides a powerful and developer-friendly
 environment for managing translations. The modular approach, with a dedicated focus on static translation keys and
 placeholders, ensures that translations remain consistent across languages and easy to maintain as the project grows.
-See [types](./types.md) for more details about how generated types are used in the project.
-
----
-
-## 📚 Related Projects
-
-* [`@sayyyat/smart-i18n`](https://www.npmjs.com/package/@sayyyat/smart-i18n) — The core CLI engine that provides
-  scanning, merging, and type generation.
-* [`next-i18n-auth`](https://github.com/Sayyat/next-i18n-auth) — Real-world example integrating both smart-i18n and
-  smart-i18n-react with feature-sliced architecture and multilingual auth flows.

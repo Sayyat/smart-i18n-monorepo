@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
-
 import fs from "fs";
 import {getPathFromLibraryRoot} from "./paths.js";
 import {copyDirectoryRecursive, getPathFromConsumerRoot} from "@sayyyat/smart-i18n/lib";

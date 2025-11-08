@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 
 import type { TNamespace, TNamespaceTranslationKeys } from "../generated";
 
