@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 import { extractNamespaces } from "./namespaces.js";
 import { fallbackLanguage, languages } from "./language.js";
 import { configs, negatedExcludePatterns } from "./config.js";
@@ -9,7 +6,6 @@ export async function getI18n() {
   const namespaces = await extractNamespaces();
   return {
     input: [...configs.includePatterns, ...negatedExcludePatterns],
-
     output: "./",
     options: {
       debug: false,

@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 import fs from "fs/promises";
 import path from "path";
 import chalk from "chalk";

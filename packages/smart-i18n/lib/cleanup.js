@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- * Cleanup unused locale files by namespaces.
- * Relies on configs from lib/config.js: includePatterns / excludePatterns / localesDirectory / generatedNamespacesPath
- */
 import path from "node:path";
 import fs from "node:fs/promises";
 import fss from "node:fs";

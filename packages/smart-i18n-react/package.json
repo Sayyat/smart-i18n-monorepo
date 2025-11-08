@@ -21,9 +21,7 @@
     "README.md"
   ],
   "scripts": {
-    "test": "node -e \"console.log('No tests yet.')\"",
-    "release": "node ./release.mjs",
-    "sir": "node bin/smart-i18n-react.mjs"
+    "test": "node -e \"console.log('No tests yet.')\""
   },
   "keywords": [
     "i18n",

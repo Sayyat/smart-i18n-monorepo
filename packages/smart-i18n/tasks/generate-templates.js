@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 import scanner from "i18next-scanner";
 import { getI18n } from "../lib/i18n.js";
 import { createCustomTransform } from "../lib/transform.js";

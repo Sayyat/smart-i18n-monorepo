@@ -1,11 +1,8 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 import {getPathFromConsumerRoot} from "./paths.js";
 import fs from "fs";
 
 export const CONFIG_FILE_NAME = "i18next.config.json";
-const filePath = getPathFromConsumerRoot(CONFIG_FILE_NAME); // Получаем путь к конфигурационному файлу
+const filePath = getPathFromConsumerRoot(CONFIG_FILE_NAME);
 
 const defaultConfigs = {
     configFilePath: "src/i18n/lib/config.ts",

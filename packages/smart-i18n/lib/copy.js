@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 import fs from "fs";
 import path from "path";
 import { getPathFromConsumerRoot, getPathFromLibraryRoot } from "./paths.js";

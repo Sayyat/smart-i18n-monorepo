@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 import VirtualFile from "vinyl";
 import eol from "eol";
 import chalk from "chalk";

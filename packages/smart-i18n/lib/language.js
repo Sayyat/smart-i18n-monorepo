@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
 
 import fs from "fs";
 import { configs } from "./config.js";
