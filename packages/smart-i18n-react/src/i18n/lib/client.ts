@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2025. Sayat Raykul
- */
-
 "use client";
 import i18next, {type i18n} from "i18next";
 import {initReactI18next, useTranslation as useI18nTranslation,} from "react-i18next";
