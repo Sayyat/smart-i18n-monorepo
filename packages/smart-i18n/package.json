@@ -14,20 +14,18 @@
   "files": [
     "bin/",
     "lib/",
-    "src/",
     "tasks/",
-    ".demo-env",
-    "gulpfile.js",
+    "gulpfile.mjs",
     "i18next.config.json",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "scripts": {
-    "test": "node -e \"console.log('No tests yet.')\"",
-    "release": "node ./release.mjs"
+    "test": "echo \"No tests for smart-i18n yet...\" && exit 0"
   },
   "keywords": [
     "i18n",
@@ -40,11 +38,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Sayyat/smart-i18n.git"
+    "url": "https://github.com/Sayyat/smart-i18n-monorepo.git",
+    "directory": "packages/smart-i18n"
   },
-  "homepage": "https://github.com/Sayyat/smart-i18n#readme",
+  "homepage": "https://github.com/Sayyat/smart-i18n-monorepo#readme",
   "bugs": {
-    "url": "https://github.com/Sayyat/smart-i18n/issues"
+    "url": "https://github.com/Sayyat/smart-i18n-monorepo/issues"
   },
   "dependencies": {
     "chalk": "^5.6.2",
