@@ -20,7 +20,7 @@ This monorepo contains the following packages and applications:
 
 ### `packages/`
 
-* **`@sayyyat/react-query-conditional`**: A zero-dependency, declarative React component to gracefully handle `@tanstack/react-query` states (`isLoading`, `isError`, `isEmpty`).
+* **`@sayyyat/react-query-conditional`**: A zero-dependency, declarative React component to gracefully handle `@tanstack/react-query` states (`isPending`, `isError`, `isEmpty`).
 * *(...future packages will be listed here)*
 
 ### `apps/`
