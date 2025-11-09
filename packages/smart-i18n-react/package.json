@@ -1,6 +1,6 @@
 {
   "name": "@sayyyat/smart-i18n-react",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "React/Next.js integration for smart-i18n with opinionated setup and automation scripts for managing translations.",
   "main": "./gulpfile.mjs",
   "type": "module",
