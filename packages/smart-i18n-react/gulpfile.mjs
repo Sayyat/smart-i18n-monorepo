@@ -1,12 +1,12 @@
 import {
     cleanTask,
-    generateNamespacesTask,
+    generateTemplatesTask,
     generateTranslationsTask,
     watchTask
 } from '@sayyyat/smart-i18n/tasks';
 
 import {
-    generateTemplatesTask,
+    generateNamespacesTask,
     generateTypesTask,
     helpTask,
     initTask,
