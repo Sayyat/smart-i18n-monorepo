@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import chalk from "chalk";
+import { AUTOGENERATION_COMMENT } from "./comment.js";
 import { configs } from "./config.js";
 import { getPathFromConsumerRoot } from "./paths.js";
 
@@ -22,7 +23,7 @@ function flattenKeys(obj, prefix = "") {
   return keys;
 }
 
-export async function generateTypes() {
+export async function generateTypes(autogenerationComment = AUTOGENERATION_COMMENT) {
   try {
     await fs.access(TEMPLATE_DIR);
   } catch {
@@ -30,7 +31,7 @@ export async function generateTypes() {
     console.error(chalk.yellow(`→ ${TEMPLATE_DIR}`));
     console.error(
       chalk.gray("💡 Run the command: ") +
-        chalk.cyan("gulp generate-templates"),
+      chalk.cyan("gulp generate-templates"),
     );
     return;
   }
@@ -52,27 +53,23 @@ export async function generateTypes() {
   }
 
   const lines = [
-    "/* Auto-generated translation keys */",
-    "// Do not edit manually.",
-    "",
+    autogenerationComment,
     "export type TNamespace =",
     ...Object.keys(namespaces).map((ns) => `  | "${ns}"`),
     "",
     "export type TNamespaceTranslationKeys = {",
     ...Object.entries(namespaces).map(
       ([ns, keys]) =>
-        `  "${ns}": ${
-          keys.length > 0
-            ? `\n    | ${keys.map((k) => `"${k}"`).join("\n    | ")}`
-            : "never"
+        `  "${ns}": ${keys.length > 0
+          ? `\n    | ${keys.map((k) => `"${k}"`).join("\n    | ")}`
+          : "never"
         };`,
     ),
     "};",
     "",
-    `export type TAllTranslationKeys = ${
-      allKeys.length > 0
-        ? "\n  | " + allKeys.map((k) => `"${k}"`).join("\n  | ")
-        : "never"
+    `export type TAllTranslationKeys = ${allKeys.length > 0
+      ? "\n  | " + allKeys.map((k) => `"${k}"`).join("\n  | ")
+      : "never"
     };`,
     "",
   ];

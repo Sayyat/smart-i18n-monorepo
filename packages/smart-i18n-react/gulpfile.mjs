@@ -1,22 +1,34 @@
 import {
-    registerTasks as registerCoreTasks
+    cleanTask,
+    generateNamespacesTask,
+    generateTranslationsTask,
+    watchTask
 } from '@sayyyat/smart-i18n/tasks';
 
-export async function registerTasks(gulp) {
-    await registerCoreTasks(gulp);
+import {
+    generateTemplatesTask,
+    generateTypesTask,
+    helpTask,
+    initTask,
+    generateConfigsTask,
+    createFeatureTask,
+} from './tasks/index.js';
 
-    const helpTask = (await import("./tasks/help.js")).default;
-    const initTask = (await import("./tasks/init.js")).default;
-    const generateConfigsTask = (await import("./tasks/generate-configs.js")).default;
-    const createFeature = (await import("./tasks/create-feature.js")).default;
+export async function registerTasks(gulp) {
+    cleanTask(gulp);
+    generateNamespacesTask(gulp);
+    generateTemplatesTask(gulp);
+    generateTranslationsTask(gulp);
+    generateTypesTask(gulp);
+    watchTask(gulp);
 
     helpTask(gulp);
     initTask(gulp);
     generateConfigsTask(gulp);
-    createFeature(gulp);
+    createFeatureTask(gulp);
 
     gulp.task("default", gulp.series(
-        "generate-config",
+        "generate-configs",
         "generate-namespaces",
         "generate-templates",
         "generate-types"

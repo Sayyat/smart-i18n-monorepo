@@ -9,7 +9,9 @@
       "default": "./gulpfile.mjs"
     },
     "./lib": "./lib/index.js",
-    "./tasks": "./tasks/index.js"
+    "./lib/*": "./lib/*.js",
+    "./tasks": "./tasks/index.js",
+    "./tasks/*": "./tasks/*.js"
   },
   "bin": "./bin/smart-i18n.mjs",
   "files": [

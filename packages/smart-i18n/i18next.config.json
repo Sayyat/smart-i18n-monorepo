@@ -12,23 +12,10 @@
   "generatedTypesPath": "src/i18n/generated/types.ts",
   "keepUnusedKeys": true,
   "includePatterns": [
-    "src/app/**/*.{jsx,tsx}",
-    "src/core/components/**/*.{js,jsx,ts,tsx}",
-    "src/core/hooks/**/*.{js,jsx,ts,tsx}",
-    "src/shared/components/**/*.{js,jsx,ts,tsx}",
-    "src/shared/hooks/**/*.{js,jsx,ts,tsx}",
-    "src/shared/services/api.{js,ts}",
-    "src/features/*/components/**/*.{js,jsx,ts,tsx}",
-    "src/features/*/hooks/**/*.{js,jsx,ts,tsx}",
-    "src/features/*/lib/zod.{js,ts}"
+    "src/**/*.{js,ts,jsx,tsx}"
   ],
   "excludePatterns": [
-    "src/**/*.d.ts",
     "**/node_modules/**",
-    "src/i18n/**",
-    "src/app/api/**",
-    "src/shared/components/ui/**",
-    "src/shared/hooks/**",
-    "src/shared/data/**"
+    "src/i18n/**"
   ]
 }

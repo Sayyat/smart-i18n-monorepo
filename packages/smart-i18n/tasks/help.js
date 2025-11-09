@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { CONFIG_FILE_NAME, configs } from "../lib/config.js";
 import { getI18n } from "../lib/i18n.js";
 
-export default function helpTask(gulp) {
+export function helpTask(gulp) {
     gulp.task("help", async function (done) {
         const i18n = await getI18n();
         console.log(chalk.bold("\nsmart-i18n Help\n"));

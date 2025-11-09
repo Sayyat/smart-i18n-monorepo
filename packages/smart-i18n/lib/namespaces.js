@@ -2,12 +2,13 @@ import fs from "fs/promises";
 import path from "path";
 import { glob } from "glob";
 import { minimatch } from "minimatch";
+import { AUTOGENERATION_COMMENT } from "./comment.js";
 import { configs } from "./config.js";
 import { getPathFromConsumerRoot, SRC_PATH } from "./paths.js";
 
 const NAMESPACES_FILE = getPathFromConsumerRoot(configs.generatedNamespacesPath);
 
-export async function extractNamespaces() {
+export async function extractNamespaces(autogenerationComment = AUTOGENERATION_COMMENT) {
   const dirPath = path.dirname(NAMESPACES_FILE);
 
   try {
@@ -17,7 +18,7 @@ export async function extractNamespaces() {
     await fs.mkdir(dirPath, { recursive: true });
     await fs.writeFile(
       NAMESPACES_FILE,
-      `/*\n * Auto-generated file.\n * Do not modify directly.\n */\n\nexport const NAMESPACES = [] as const;\n`,
+      autogenerationComment,
       "utf8",
     );
     return [];
@@ -52,7 +53,7 @@ function normalizeNamespacePath(filePath = "") {
   return withoutExt;
 }
 
-export async function generateNamespaces() {
+export async function generateNamespaces(autogenerationComment = AUTOGENERATION_COMMENT) {
   const allFiles = configs.includePatterns.flatMap((pattern) =>
     glob.sync(pattern),
   );
@@ -73,7 +74,7 @@ export async function generateNamespaces() {
     "[\n" + sorted.map((ns) => `  "${ns}",`).join("\n") + "\n]";
 
   const content =
-    `/*\n * Auto-generated file.\n * Do not modify directly.\n */\n\n` +
+    `${autogenerationComment}.\n` +
     `export const NAMESPACES = ${namespaceArrayString} as const;\n`;
 
   await fs.mkdir(path.dirname(NAMESPACES_FILE), { recursive: true });

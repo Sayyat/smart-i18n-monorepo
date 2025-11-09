@@ -3,7 +3,7 @@ import { getI18n } from "../lib/i18n.js";
 import { createCustomTransform } from "../lib/transform.js";
 import { customFlush } from "../lib/flush.js";
 
-export default function generateTemplates(gulp) {
+export function generateTemplatesTask(gulp) {
   gulp.task("generate-templates", async function () {
     const i18n = await getI18n();
     const transform = await createCustomTransform();

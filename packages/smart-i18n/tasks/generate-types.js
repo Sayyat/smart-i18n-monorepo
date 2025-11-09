@@ -1,7 +1,8 @@
+import { AUTOGENERATION_COMMENT } from "../lib/comment.js";
 import { generateTypes } from "../lib/type.js";
 
-export default function generateTypesTask(gulp) {
+export function generateTypesTask(gulp) {
   gulp.task("generate-types", async function () {
-    await generateTypes();
+    await generateTypes(AUTOGENERATION_COMMENT);
   });
 }

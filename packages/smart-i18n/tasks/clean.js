@@ -2,7 +2,7 @@ import { cleanUnusedFiles } from "../lib/cleanup.js";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
-export default function cleanTask(gulp) {
+export function cleanTask(gulp) {
     gulp.task("clean-translations", async function () {
         const argv = yargs(hideBin(process.argv))
             .option("dry", {

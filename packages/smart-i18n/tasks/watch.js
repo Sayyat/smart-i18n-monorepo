@@ -6,7 +6,7 @@ import {
   negatedExcludePatterns,
 } from "../lib/config.js";
 
-export default function watchTask(gulp) {
+export function watchTask(gulp) {
   gulp.task("watch", function (done) {
     const watchPatterns = [
       CONFIG_FILE_NAME,

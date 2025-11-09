@@ -1,7 +1,8 @@
+import { AUTOGENERATION_COMMENT } from "../lib/comment.js";
 import { generateNamespaces } from "../lib/namespaces.js";
 
-export default function generateNamespacesTask(gulp) {
+export function generateNamespacesTask(gulp) {
   gulp.task("generate-namespaces", async function () {
-    await generateNamespaces();
+    await generateNamespaces(AUTOGENERATION_COMMENT);
   });
 }

@@ -2,7 +2,7 @@ import { translate } from "../lib/translation.js";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
-export default function generateTranslations(gulp) {
+export function generateTranslationsTask(gulp) {
   gulp.task("generate-translations", async function () {
     const argv = yargs(hideBin(process.argv))
       .option("lang", {
