@@ -5,17 +5,17 @@
 [![License](https://img.shields.io/npm/l/@sayyyat/smart-i18n)](./LICENSE)
 [![CI/CD Status](https://img.shields.io/github/actions/workflow/status/Sayyat/smart-i18n-monorepo/publish.yml?branch=main&kill_cache=1)](https://github.com/Sayyat/smart-i18n-monorepo/actions)
 
-> A Gulp-based CLI toolkit for modular, scalable i18n in JS/TS projects
+> **Core CLI Package.** A Gulp-based CLI toolkit for modular, scalable i18n in JS/TS projects.
 
-Smart-i18n is a framework-agnostic internationalization (i18n) CLI toolkit that automates translation workflows in JavaScript and TypeScript projects. It is based on **Gulp** and designed to integrate seamlessly into apps built with **Next.js**, **React**, **Vue**, or other frontend/backend stacks.
+This package provides the core, framework-agnostic CLI for the smart-i18n system. It automates namespace generation, key extraction, machine translation, and TypeScript typing.
 
 -----
 
 ### ❗️ Note for React / Next.js Users
 
-This is the **core package** for the `smart-i18n` system.
+This is the **core package**. If you are working with **React** or **Next.js**, you should install the **`@sayyyat/smart-i18n-react`** package instead.
 
-If you are working with **React** or **Next.js**, you should install the **`@sayyyat/smart-i18n-react`** package instead. It includes all features from this core package, plus additional React-specific `init` and `create-feature` (FSD) commands.
+The React package includes all commands from this core package, plus React-specific `init` templates and `create-feature` (FSD) scaffolding.
 
 ➡️ [**@sayyyat/smart-i18n-react README**](../smart-i18n-react/README.md)
 
@@ -24,11 +24,11 @@ If you are working with **React** or **Next.js**, you should install the **`@say
 ## 🚀 Features
 
   * ✅ Automatic **namespace detection** and key extraction from your code.
-  * 🔄 Seamless **translation file merging** (preserves existing keys and structure).
-  * 🌐 On-demand **machine translation** of missing keys via Deep Translate (RapidAPI).
-  * 🔒 Safe **TypeScript typings** generation for all i18n keys.
+  * 🔄 Seamless **translation file merging** (preserves existing keys).
+  * 🌐 On-demand **machine translation** of missing keys via RapidAPI (using `key == value` detection).
+  * 🔒 Safe **TypeScript typings** generation (`generate:types`).
+  * ⚙️ **Runtime Config Generation** (`generate:config`) from a single source of truth (`i18next.config.json`).
   * 🧱 Modular **Gulp tasks** for fully scriptable and extendable i18n pipelines.
-  * 🧰 CLI-based, works via `npx @sayyyat/smart-i18n`.
 
 -----
 
@@ -47,29 +47,60 @@ yarn add @sayyyat/smart-i18n -D
 npm install @sayyyat/smart-i18n --save-dev
 ```
 
-## ⚙️ Usage
+## ⚙️ Configuration & Usage
 
-The package can be invoked via `package.json` scripts or `npx`:
+This package is designed to be run from within a consumer project.
+
+### 1\. Configuration
+
+The entire system is controlled by a single **`i18next.config.json`** file in your project root.
+
+Run the `init` command to automatically create a default config file:
 
 ```bash
-npx smart-i18n <command> [options]
+npx smart-i18n init
 ```
 
-A full list of available commands and their options is available in the documentation.
+This will create `i18next.config.json` and a `.demo-env` file. The CLI reads all settings (languages, paths, etc.) from this JSON file.
 
------
+### 2\. Core CLI Commands
 
-## 📁 Documentation
+All commands are available via `npx` or `package.json` scripts.
 
-  * 📚 [**Documentation**](./docs/DOCUMENTATION.md) — Full setup, configuration, and **command list**.
+  * **`npx smart-i18n`** (Default task)
+
+      * Runs the main generation pipeline in order:
+
+    <!-- end list -->
+
+    1.  `generate-config` (Updates `src/i18n/lib/config.ts` from `i18next.config.json`)
+    2.  `generate-namespaces` (Scans code for new namespaces)
+    3.  `generate-templates` (Scans code for new keys)
+    4.  `generate-types` (Generates TypeScript types from keys)
+
+  * **`npx smart-i18n generate-translations`**
+
+      * **This is the "killer feature".**
+      * Scans all locale files (e.g., `kk/common.json`).
+      * Finds all keys where `key === value` (meaning they are not translated yet).
+      * Sends the `key` (which is the full English text) to RapidAPI for translation.
+      * Caches requests to avoid duplicate API calls and save costs.
+
+  * **`npx smart-i18n watch`**
+
+      * Runs the `default` task automatically when your source files change.
+
+  * **`npx smart-i18n help`**
+
+      * Displays a full list of all available commands.
 
 -----
 
 ## 🔗 Example Integration
 
-A new Next.js 16 example application is included in this monorepo under the `apps/example-next16` directory.
+A Next.js 16 example application that uses this tooling is available in the monorepo:
 
-The previous example (`next-i18n-auth`) is now archived, as it used an older version of this package.
+➡️ [**`apps/next-i18n`**](https://github.com/Sayyat/smart-i18n-monorepo/tree/main/apps/next-i18n)
 
 -----
 
