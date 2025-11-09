@@ -20,11 +20,11 @@ Here is the layout of the **i18n** system files:
 src/
 ├── i18n/
 │   ├── generated/          // Generated files for namespaces and translation types
+│   │   ├── config.ts       // Configuration file for languages and fallback
 │   │   ├── index.ts        // public api
 │   │   ├── namespaces.ts   // Client-side i18next initialization
 │   │   └── types.ts        // Type-safe wrapper for translation functions
 │   ├── lib/
-│   │   ├── config.ts       // Configuration file for languages and fallback
 │   │   └── safety.ts       // Type-safe wrapper for translation functions
 │   ├── locales/            // Translation files per language (JSON)
 │   ├── types/

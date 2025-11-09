@@ -2,7 +2,6 @@ import fs from "fs/promises";
 import path from "path";
 import fetch from "node-fetch";
 import chalk from "chalk";
-import {fallbackLanguage, languages} from "./language.js";
 import dotenv from "dotenv";
 import {configs} from "./config.js";
 
@@ -42,7 +41,7 @@ const translationCache = new Map();
 async function sendTranslationRequestDeepL(
     text,
     targetLang,
-    sourceLang = languages,
+    sourceLang = configs.languages,
 ) {
     const cacheKey = `${sourceLang}::${targetLang}::${text}`;
     if (translationCache.has(cacheKey)) {
@@ -75,7 +74,7 @@ function isAllDigit(str) {
     return /^\d+$/.test(String(str).trim());
 }
 
-async function translateChunk(chunk, targetLanguage, sourceLanguage = fallbackLanguage) {
+async function translateChunk(chunk, targetLanguage, sourceLanguage = configs.fallbackLanguage) {
     const results = [];
     const sameLang = targetLanguage === sourceLanguage;
 
@@ -152,13 +151,13 @@ export async function translate(requestedLang = "all") {
 
     const targetLanguages =
         requestedLang === "all"
-            ? languages
-            : languages.includes(requestedLang)
+            ? configs.languages
+            : configs.languages.includes(requestedLang)
                 ? [requestedLang]
                 : (() => {
                     console.error(
                         chalk.red(
-                            `❌ Invalid language: "${requestedLang}". Allowed: ${languages.join(", ")}`,
+                            `❌ Invalid language: "${requestedLang}". Allowed: ${configs.languages.join(", ")}`,
                         ),
                     );
                     return [];
@@ -168,11 +167,11 @@ export async function translate(requestedLang = "all") {
 
     console.log({targetLanguages});
     try {
-        const files = await fs.readdir(path.join(LANGUAGES_DIR, fallbackLanguage));
+        const files = await fs.readdir(path.join(LANGUAGES_DIR, configs.fallbackLanguage));
 
         const dataByFile = {};
         for (const file of files) {
-            const filePath = path.join(LANGUAGES_DIR, fallbackLanguage, file);
+            const filePath = path.join(LANGUAGES_DIR, configs.fallbackLanguage, file);
             const content = await fs.readFile(filePath, "utf8");
             const json = JSON.parse(content);
             dataByFile[file] = json;
@@ -189,7 +188,7 @@ export async function translate(requestedLang = "all") {
                 const translatedChunk = await translateChunk(
                     chunk,
                     lang,
-                    fallbackLanguage,
+                    configs.fallbackLanguage,
                 );
                 for (const {filename, key, translated} of translatedChunk) {
                     resultMap[lang][filename] = resultMap[lang][filename] || {};

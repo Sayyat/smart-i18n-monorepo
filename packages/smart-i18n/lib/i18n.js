@@ -1,5 +1,4 @@
 import { extractNamespaces } from "./namespaces.js";
-import { fallbackLanguage, languages } from "./language.js";
 import { configs, negatedExcludePatterns } from "./config.js";
 
 export async function getI18n() {
@@ -23,10 +22,10 @@ export async function getI18n() {
         extensions: [],
       },
       trans: undefined,
-      lngs: languages,
-      fallbackLng: fallbackLanguage,
+      lngs: configs.languages,
+      fallbackLng: configs.fallbackLanguage,
       ns: namespaces,
-      defaultLng: fallbackLanguage,
+      defaultLng: configs.fallbackLanguage,
       defaultNs: "translation", // или свой существующий ns
       defaultValue: "__STRING_NOT_TRANSLATED__",
       resource: {

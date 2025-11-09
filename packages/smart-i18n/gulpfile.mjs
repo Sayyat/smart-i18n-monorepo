@@ -17,5 +17,10 @@ export async function registerTasks(gulp) {
     initTask(gulp);
     watchTask(gulp);
 
-    gulp.task("default", gulp.series("generate-namespaces", "generate-templates", "generate-types"));
+    gulp.task("default", gulp.series(
+        "generate-config",
+        "generate-namespaces",
+        "generate-templates",
+        "generate-types"
+    ));
 }

@@ -2,12 +2,11 @@ import fs from "fs/promises";
 import path from "path";
 import chalk from "chalk";
 import { configs } from "./config.js";
-import { fallbackLanguage } from "./language.js";
 import { getPathFromConsumerRoot } from "./paths.js";
 
 const TEMPLATE_DIR = getPathFromConsumerRoot(
   configs.localesDirectory,
-  fallbackLanguage,
+  configs.fallbackLanguage,
 );
 const OUTPUT_FILE = getPathFromConsumerRoot(configs.generatedTypesPath);
 

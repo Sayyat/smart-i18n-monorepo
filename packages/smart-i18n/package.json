@@ -8,7 +8,8 @@
     ".": {
       "default": "./gulpfile.mjs"
     },
-    "./lib": "./lib/index.js"
+    "./lib": "./lib/index.js",
+    "./tasks": "./tasks/index.js"
   },
   "bin": "./bin/smart-i18n.mjs",
   "files": [
@@ -39,7 +40,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Sayyat/smart-i18n-monorepo.git",
-    "directory": "packages/smart-i18n"
+    "directory": "packages/smart-i18n-react"
   },
   "homepage": "https://github.com/Sayyat/smart-i18n-monorepo#readme",
   "bugs": {

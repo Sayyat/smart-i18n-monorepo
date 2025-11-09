@@ -5,6 +5,9 @@ export const CONFIG_FILE_NAME = "i18next.config.json";
 const filePath = getPathFromConsumerRoot(CONFIG_FILE_NAME);
 
 const defaultConfigs = {
+    languages: ["kk", "ru", "en"],
+    fallbackLanguage: "en",
+    defaultNS: "translation",
     configFilePath: "src/i18n/lib/config.ts",
     localesDirectory: "src/i18n/locales",
     generatedNamespacesPath: "src/i18n/generated/namespaces.ts",
