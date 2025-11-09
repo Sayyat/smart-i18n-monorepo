@@ -1,33 +1,37 @@
 import fs from "fs";
-import {getPathFromLibraryRoot} from "./paths.js";
-import {copyDirectoryRecursive, getPathFromConsumerRoot} from "@sayyyat/smart-i18n/lib";
+// ❗️ Өзінің жергілікті (local) helper-лерін импорттайды
+import { copyDirectoryRecursive, copyFileWithCheck } from "./copy.js";
+import { getPathFromConsumerRoot, getPathFromLibraryRoot } from "./paths.js";
 
-export function copyBaseInitFiles() {
-    const fileList = ["./i18next.config.json", "./.demo-env"];
+export function init(isFsd = false) {
+  
+  // 1. ❗️ Дұрыс шаблон папкасын таңдау
+  const templateDirName = isFsd ? "fsd" : "default";
+  const configSourceDir = getPathFromLibraryRoot("configs", templateDirName);
+  
+  const consumerRootDir = getPathFromConsumerRoot();
 
-    for (const file of fileList) {
-        const src = getPathFromLibraryRoot(file);
-        const dest = getPathFromConsumerRoot(file);
+  console.log(`🚀 Initializing with ${isFsd ? 'FSD' : 'default'} template...`);
 
-        if (!fs.existsSync(src)) {
-            console.warn(`⚠️ Skipped: ${file} not found in library`);
-            continue;
-        }
+  // 2. ❗️ 'i18next.config.json' файлын таңдалған папкадан көшіру
+  copyFileWithCheck(
+    configSourceDir, 
+    consumerRootDir, 
+    "i18next.config.json"
+  );
 
-        if (fs.existsSync(dest)) {
-            console.warn(`⚠️ Skipped: ${file} already exists in project`);
-            continue;
-        }
+  // 3. ❗️ '.demo-env' файлын көшіру (ол 'configs' ішінде емес, негізгі (root) папкада деп есептейміз)
+  const demoEnvSourceDir = getPathFromLibraryRoot(); // Кітапхананың түбірі
+  copyFileWithCheck(
+    demoEnvSourceDir, 
+    consumerRootDir, 
+    ".demo-env"
+  );
 
-        fs.copyFileSync(src, dest);
-        console.log(`✅ Copied: ${file}`);
-    }
-}
-
-export function init() {
-    copyBaseInitFiles();
-
-    const libraryTemplatePath = getPathFromLibraryRoot("src", "i18n");
-    const consumerSrc = getPathFromConsumerRoot("src", "i18n");
-    copyDirectoryRecursive(libraryTemplatePath, consumerSrc);
+  // 4. ❗️ 'src/i18n' шаблондарын көшіру (бұл бұрынғыдай)
+  const libraryTemplatePath = getPathFromLibraryRoot("src", "i18n");
+  const consumerSrcPath = getPathFromConsumerRoot("src", "i18n");
+  
+  // 'copyDirectoryRecursive' өз тексерулерін (checks) өзі жасайды
+  copyDirectoryRecursive(libraryTemplatePath, consumerSrcPath);
 }

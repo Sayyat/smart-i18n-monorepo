@@ -2,7 +2,7 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { generateFeatureStructure } from "../lib/feature.js";
 
-export default function createFeatureTask(gulp) {
+export function createFeatureTask(gulp) {
   gulp.task("create-feature", function (done) {
     const argv = yargs(hideBin(process.argv))
       .option("name", {

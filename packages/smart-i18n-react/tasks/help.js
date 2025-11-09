@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import {CONFIG_FILE_NAME} from "@sayyyat/smart-i18n/lib";
 
-export default function helpTask(gulp) {
+export function helpTask(gulp) {
     gulp.task("help", async function (done) {
         console.log(chalk.bold("\nsmart-i18n-react Help\n"));
 

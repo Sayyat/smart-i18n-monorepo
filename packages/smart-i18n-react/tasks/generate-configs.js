@@ -1,9 +1,10 @@
+import { AUTOGENERATION_COMMENT } from "../lib/comment.js";
 import { generateConfigs } from "../lib/config-generator.js";
 
-export default function generateConfigTask(gulp) {
+export function generateConfigsTask(gulp) {
   const task = async () => {
-    await generateConfigs();
+    await generateConfigs(AUTOGENERATION_COMMENT);
   };
   
-  gulp.task("generate-config", task);
+  gulp.task("generate-configs", task);
 }

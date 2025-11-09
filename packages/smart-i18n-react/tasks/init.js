@@ -1,5 +1,10 @@
-import {init} from "../lib/init.js";
+import { init } from "../lib/init.js";
 
-export default function initTask(gulp) {
-    gulp.task("init", init);
+export function initTask(gulp) {
+    const task = () => {
+        const isFsd = process.argv.includes('--fsd');
+        init(isFsd);
+    };
+
+    gulp.task("init", task);
 }
