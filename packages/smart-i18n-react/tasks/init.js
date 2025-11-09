@@ -1,5 +1,5 @@
 import {init} from "../lib/init.js";
 
-export default function initTask(gulpInstance) {
-    gulpInstance.task("init", init);
+export default function initTask(gulp) {
+    gulp.task("init", init);
 }

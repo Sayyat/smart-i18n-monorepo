@@ -4,7 +4,7 @@ import {initReactI18next, useTranslation as useI18nTranslation,} from "react-i18
 import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import {NAMESPACES, type TNamespace, type  TNamespaceTranslationKeys} from "../generated";
-import {COOKIE_NAME, defaultNS, FALLBACK_LANGUAGE, languages} from "./config";
+import {COOKIE_NAME, defaultNS, FALLBACK_LANGUAGE, languages} from "../generated/config";
 import {safeT} from "./safety";
 
 // Initialize i18next for client-side

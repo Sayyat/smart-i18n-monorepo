@@ -26,7 +26,7 @@
 import {createInstance} from "i18next";
 import {safeT} from "./safety";
 import {NAMESPACES, type TNamespace, type  TNamespaceTranslationKeys} from "../generated";
-import {COOKIE_NAME, FALLBACK_LANGUAGE, type TLanguage} from "./config";
+import {COOKIE_NAME, FALLBACK_LANGUAGE, type TLanguage} from "../generated/config";
 import {cookies} from "next/headers";
 import fs from "fs/promises";
 import path from "path";

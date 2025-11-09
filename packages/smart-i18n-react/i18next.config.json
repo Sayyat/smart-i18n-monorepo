@@ -1,4 +1,12 @@
 {
+  "languages": [
+    "kk",
+    "ru",
+    "en"
+  ],
+  "fallbackLanguage": "en",
+  "defaultNS": "translation",
+  "cookieName": "NEXT_LANGUAGE",
   "configFilePath": "src/i18n/lib/config.ts",
   "localesDirectory": "src/i18n/locales",
   "generatedNamespacesPath": "src/i18n/generated/namespaces.ts",
