@@ -31,6 +31,11 @@ export function helpTask(gulp) {
             )} -> ${chalk.yellow("generate-types")}`
         );
 
+        // gulp generate-config
+        console.log(chalk.green("\n  smart-i18n generate-config"));
+        console.log("    Generates runtime config (src/i18n/lib/config.ts) from " + chalk.yellow(CONFIG_FILE_NAME));
+        console.log("    (This task is included in the default sequence)");
+
         // gulp generate-namespaces
         console.log(chalk.green("\n  smart-i18n generate-namespaces"));
         console.log("    Scans your codebase and generates namespace definitions");
@@ -139,48 +144,33 @@ export function helpTask(gulp) {
         console.log(chalk.green("\n  smart-i18n help"));
         console.log("    Displays this help information");
 
-        console.log(chalk.cyan("\nWorkflow:"));
+        console.log(chalk.cyan("\nRecommended Workflow:"));
         console.log(
             "  1. Run " +
-            chalk.green("smart-i18n init") +
-            " initialize your project to use smart-i18n"
+            chalk.green("smart-i18n-react init") +
+            " or " +
+            chalk.green("init --fsd") +
+            " to initialize your project."
         );
         console.log(
-            "  2. Run " +
-            chalk.green("smart-i18n generate-namespaces") +
-            " to update namespace definitions"
+            "  2. Edit " +
+            chalk.yellow(CONFIG_FILE_NAME) +
+            " to match your project structure."
         );
         console.log(
             "  3. Run " +
-            chalk.green("smart-i18n generate-templates") +
-            " to extract translation keys"
+            chalk.green("smart-i18n-react") +
+            " (default) to generate all types and templates."
         );
         console.log(
             "  4. Run " +
-            chalk.green("smart-i18n generate-types") +
-            " to update TypeScript types"
+            chalk.green("smart-i18n-react generate-translations") +
+            " to auto-translate."
         );
         console.log(
             "  5. Run " +
-            chalk.green("smart-i18n generate-translations") +
-            " to translate missing keys"
-        );
-        console.log(
-            "  6. Optionally run " +
-            chalk.green("smart-i18n clean-translations") +
-            " to remove unused translation files"
-        );
-        console.log(
-            "  7. Run " +
-            chalk.green("smart-i18n watch") +
-            " to run generate-namespaces -> generate-templates -> generate-types on file changes"
-        );
-
-        console.log(chalk.cyan("\nConfiguration:"));
-        console.log(
-            "  Edit " +
-            chalk.yellow(CONFIG_FILE_NAME) +
-            " to customize paths and patterns"
+            chalk.green("smart-i18n-react watch") +
+            " during development."
         );
 
         console.log(); // Empty line at the end
