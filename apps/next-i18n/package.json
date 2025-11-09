@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "i18n": "smart-i18n-react",
+    "i18n:translate": "smart-i18n-react generate-translations",
+    "i18n:watch": "smart-i18n-react watch",
+    "i18n:feature": "smart-i18n-react create-feature"
   },
   "dependencies": {
     "@sayyyat/smart-i18n-react": "workspace:*",
