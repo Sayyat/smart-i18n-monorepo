@@ -25,8 +25,8 @@ i18next
         ns: NAMESPACES,
         defaultNS,
         fallbackNS: defaultNS,
-        nsSeparator: ".",
-        keySeparator: ".",
+        nsSeparator: false,
+        keySeparator: false,
         load: "languageOnly",
         detection: {
             order: ["cookie", "htmlTag", "navigator"],

@@ -15,6 +15,10 @@
   },
   "dependencies": {
     "@sayyyat/smart-i18n-react": "workspace:*",
+    "i18next": "^25.6.2",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "i18next-cli": "^1.23.5",
+    "i18next-resources-to-backend": "^1.2.1",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
