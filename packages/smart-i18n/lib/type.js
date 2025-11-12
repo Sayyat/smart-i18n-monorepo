@@ -54,6 +54,7 @@ export async function generateTypes(autogenerationComment = AUTOGENERATION_COMME
 
   const lines = [
     autogenerationComment,
+    "",
     "export type TNamespace =",
     ...Object.keys(namespaces).map((ns) => `  | "${ns}"`),
     "",
