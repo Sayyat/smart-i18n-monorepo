@@ -73,9 +73,10 @@ export async function generateNamespaces(autogenerationComment = AUTOGENERATION_
   const namespaceArrayString =
     "[\n" + sorted.map((ns) => `  "${ns}",`).join("\n") + "\n]";
 
-  const content =
-    `${autogenerationComment}.\n` +
-    `export const NAMESPACES = ${namespaceArrayString} as const;\n`;
+  const content = `
+${autogenerationComment}
+
+export const NAMESPACES = ${namespaceArrayString} as const;`.trim();
 
   await fs.mkdir(path.dirname(NAMESPACES_FILE), { recursive: true });
   await fs.writeFile(NAMESPACES_FILE, content, "utf8");
