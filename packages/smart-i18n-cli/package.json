@@ -37,11 +37,9 @@
     "yargs": "^18.0.0"
   },
   "peerDependencies": {
-    "@i18next/cli": "^1.0.0",
     "i18next": ">=23.0.0"
   },
   "devDependencies": {
-    "@i18next/cli": "^1.0.0",
     "@types/node": "^20.11.24",
     "tsup": "^8.2.3",
     "typescript": "^5.3.3"
