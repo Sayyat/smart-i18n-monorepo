@@ -1,4 +1,16 @@
-# @sayyyat/smart-i18n
+# ⚠️ DEPRECATED
+
+> **This package is no longer maintained.**
+> Please migrate to the new, next-generation CLI: **[@sayyyat/smart-i18next-cli](https://www.npmjs.com/package/@sayyyat/smart-i18next-cli)**
+
+### Why migrate?
+* 🚀 **Pure TypeScript:** The new CLI is built entirely in TypeScript for better stability.
+* ⚡️ **AST Parsing:** Uses `i18next-cli` (AST) instead of Regex/Gulp for smarter extraction.
+* 💎 **Better Features:** Full support for **`<Trans>` components**, stricter type generation, and faster execution.
+
+---
+
+# @sayyyat/smart-i18n (Legacy)
 
 [![npm version](https://img.shields.io/npm/v/@sayyyat/smart-i18n)](https://www.npmjs.com/package/@sayyyat/smart-i18n)
 [![npm downloads](https://img.shields.io/npm/dm/@sayyyat/smart-i18n)](https://www.npmjs.com/package/@sayyyat/smart-i18n)
