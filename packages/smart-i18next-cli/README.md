@@ -1,8 +1,9 @@
 # @sayyyat/smart-i18next-cli
 
-[@sayyyat/smart-i18next-cli](https://www.npmjs.com/package/%40sayyyat/smart-i18next-cli)
-
-[LICENSE](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/@sayyyat/smart-i18next-cli.svg)](https://www.npmjs.com/package/@sayyyat/smart-i18next-cli)
+[![License](https://img.shields.io/npm/l/@sayyyat/smart-i18next-cli)](./LICENSE)
+[![npm downloads](https://img.shields.io/npm/dm/@sayyyat/smart-i18next-cli)](https://www.npmjs.com/package/@sayyyat/smart-i18next-cli)
+[![CI/CD](https://github.com/Sayyat/smart-i18n-monorepo/actions/workflows/publish.yml/badge.svg)](https://github.com/Sayyat/smart-i18n-monorepo/actions/workflows/publish.yml)
 
 > **The "Smart" Wrapper for i18next-cli.**
 > Automates namespacing, type generation, and machine translation for React, Next.js, and TypeScript projects.
