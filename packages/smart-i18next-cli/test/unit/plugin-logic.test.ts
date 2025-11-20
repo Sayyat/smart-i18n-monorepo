@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { ConsoleLogger, SmartI18nPlugin } from '../../src';
+import { ConsoleLogger, SmartI18nextPlugin } from '../../src';
 
-const plugin = SmartI18nPlugin(new ConsoleLogger(false));
+const plugin = SmartI18nextPlugin(new ConsoleLogger(false));
 
 describe('SmartI18nPlugin Logic', () => {
 

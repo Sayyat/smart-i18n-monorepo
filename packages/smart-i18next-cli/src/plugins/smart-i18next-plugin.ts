@@ -44,7 +44,7 @@ const TFUNCTION_COMPLEX_REGEX = /(\(\s*[^)]*?)(\bt\s*:\s*TFunction(?:\s*<\s*(["'
  * 2. 'key: key' default value logic.
  * 3. Smart merging to preserve unused keys.
  */
-export const SmartI18nPlugin = (
+export const SmartI18nextPlugin = (
 	logger: ILogger = new ConsoleLogger(true, '[smart-i18next-plugin]'),
 ): Plugin => {
 

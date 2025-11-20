@@ -1,5 +1,5 @@
 import { defineConfig } from 'i18next-cli';
-import { SmartI18nPlugin } from './src';
+import { SmartI18nextPlugin } from './src';
 
 export default defineConfig({
 	locales: [
@@ -21,6 +21,6 @@ export default defineConfig({
 		},
 	},
 	plugins: [
-		SmartI18nPlugin()
+		SmartI18nextPlugin()
 	]
 });
