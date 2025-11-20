@@ -17,7 +17,6 @@ export default defineConfig({
 		removeUnusedKeys: true,
 		sort: true,
 		defaultValue: (key,namespace, language, value ) => {
-			console.log({key,namespace, language, value})
 			return value ?? key;
 		},
 	},
