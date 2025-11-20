@@ -139,7 +139,7 @@ export default defineConfig({
         // ❗️ Critical for Auto-Translation
         // Ensures new keys are written as "Key": "Key" instead of "Key": ""
 		defaultValue: (key,namespace, language, value ) => {
-			return value ?? key;
+			return value || key;
 		},
 	},
 	plugins: [
