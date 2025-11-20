@@ -118,7 +118,7 @@ The `init` command creates a `i18next.config.ts` file. This is your **Single Sou
 
 ```typescript
 import { defineConfig } from 'i18next-cli';
-import { SmartI18nPlugin } from '@sayyyat/smart-i18next-cli';
+import { SmartI18nextPlugin } from '@sayyyat/smart-i18next-cli';
 
 export default defineConfig({
 	locales: [
@@ -144,7 +144,7 @@ export default defineConfig({
 	},
 	plugins: [
         // ❗️ Activates 1-to-1 namespacing and type generation hooks
-        SmartI18nPlugin()
+        SmartI18nextPlugin()
 	]
 });
 ```
