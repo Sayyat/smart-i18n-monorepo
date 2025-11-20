@@ -1,0 +1,1 @@
+export * from "./smart-i18next-plugin"

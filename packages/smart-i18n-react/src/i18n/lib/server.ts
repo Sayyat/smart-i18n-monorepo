@@ -23,11 +23,18 @@
 
 "use server";
 
-import {createInstance} from "i18next";
-import {safeT} from "./safety";
-import {NAMESPACES, type TNamespace, type  TNamespaceTranslationKeys} from "../generated";
-import {COOKIE_NAME, FALLBACK_LANGUAGE, type TLanguage} from "../generated/config";
-import {cookies} from "next/headers";
+import { createInstance } from "i18next";
+import { safeT } from "./safety";
+import {
+	COOKIE_NAME,
+	defaultNS,
+	FALLBACK_LANGUAGE,
+	NAMESPACES,
+	type TLanguage,
+	type TNamespace,
+	type  TNamespaceTranslationKeys
+} from "../generated";
+import { cookies } from "next/headers";
 import fs from "fs/promises";
 import path from "path";
 
@@ -45,7 +52,7 @@ const isKnownNamespace = (ns: string): ns is TKnownNamespace =>
 	(NAMESPACES as readonly string[]).includes(ns);
 
 const pickFallbackNamespace = (): TKnownNamespace =>
-	(NAMESPACES.includes("common" as any) ? "common" : NAMESPACES[0]) as TKnownNamespace;
+	(NAMESPACES.includes(defaultNS as any) ? defaultNS : NAMESPACES[0]) as TKnownNamespace;
 
 const warnStaleNamespace = (ns: string, chosen: TKnownNamespace) => {
 	if (process.env.NODE_ENV !== "production") {
@@ -74,7 +81,7 @@ async function initI18nextOnce(lng: string, ns: string) {
 	return createInstance(
 		{
 			lng,
-			fallbackLng: "en",
+			fallbackLng: FALLBACK_LANGUAGE,
 			ns: [ns],
 			defaultNS: ns,
 			resources: {
@@ -85,7 +92,6 @@ async function initI18nextOnce(lng: string, ns: string) {
 			returnNull: false,
 			returnEmptyString: true,
 			returnObjects: false,
-			nsSeparator: ".",
 			keySeparator: ".",
 			load: "languageOnly",
 		},

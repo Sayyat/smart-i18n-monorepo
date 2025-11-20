@@ -1,0 +1,10 @@
+{
+  "Email is invalid": "Email is invalid",
+  "Email is required": "Email is required",
+  "Firstname is required": "Firstname is required",
+  "Lastname is required": "Lastname is required",
+  "Password and Confirm mismatch": "Password and Confirm mismatch",
+  "Password is weak": "Password is weak",
+  "Password must be at least {{symbols}} symbols": "Password must be at least {{symbols}} symbols",
+  "You must agree with the terms": "You must agree with the terms"
+}

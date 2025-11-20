@@ -1,0 +1,87 @@
+// Centralized error extraction
+import { TFunction, TNamespaceTranslationKeys } from "@/i18n";
+import axios from "axios";
+import { IErrorResponse } from "@/shared/types/api";
+
+export async function extractErrorMessage(
+	error: unknown,
+	t: TFunction<"shared.services.api">
+): Promise<string> {
+	// console.log(chalk.yellow(error));
+
+	if (!axios.isAxiosError(error)) {
+		return t("Unknown Error");
+	}
+
+	const { response, code, message } = error;
+
+	if (!response) {
+		const translated = t(
+			code as TNamespaceTranslationKeys["shared.services.api"],
+			{},
+		);
+		return translated !== code ? translated : t("Unknown Error");
+	}
+
+	const {
+		code: resCode,
+		message: resMessage,
+		detail,
+	} = (response.data as IErrorResponse) || {};
+	let detailMessage = "";
+	if (detail) {
+		if (typeof detail === "string") {
+			detailMessage = detail;
+		} else if (typeof detail === "object") {
+			try {
+				detailMessage = JSON.stringify(detail, null, 2);
+			} catch {
+				detailMessage = String(detail);
+			}
+		}
+	}
+
+	const translated = resCode
+		? t(resCode as TNamespaceTranslationKeys["shared.services.api"])
+		: "";
+
+	const baseMessage =
+		translated !== resCode ? translated : resMessage || t("Unknown Error");
+
+	return detailMessage ? `${baseMessage}\n\n${detailMessage}` : baseMessage;
+}
+
+export async function dummyTranslationsForScanner(
+	t: TFunction<"shared.services.api">
+) {
+	// Static error keys to be translated automatically by i18next-scanner
+	// These are predefined error codes, and i18next-scanner will automatically generate their translations
+	// Make sure to add dynamic backend-specific error codes here manually (as they are context-dependent).
+	// After adding new error codes, run the `smart-i18next-cli` task to update translations.
+	return [
+		// Axios-specific codes
+		t("ERR_FR_TOO_MANY_REDIRECTS"),
+		t("ERR_BAD_OPTION_VALUE"),
+		t("ERR_BAD_OPTION"),
+		t("ERR_NETWORK"),
+		t("ERR_DEPRECATED"),
+		t("ERR_BAD_RESPONSE"),
+		t("ERR_BAD_REQUEST"),
+		t("ERR_NOT_SUPPORT"),
+		t("ERR_INVALID_URL"),
+		t("ERR_CANCELED"),
+
+		// Node.js low-level network errors
+		t("ECONNREFUSED"),
+		t("ECONNRESET"),
+		t("ETIMEDOUT"),
+		t("EHOSTUNREACH"),
+		t("ENETUNREACH"),
+		t("EAI_AGAIN"),
+		t("ENOTFOUND"),
+		t("EPIPE"),
+		t("EACCES"),
+		t("ECONNABORTED"),
+	];
+}
+

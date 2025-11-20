@@ -8,26 +8,27 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "i18n": "smart-i18n-react",
-    "i18n:translate": "smart-i18n-react generate-translations",
-    "i18n:watch": "smart-i18n-react watch",
-    "i18n:feature": "smart-i18n-react create-feature"
+    "i18n": "smart-i18next-cli",
+    "i18n:translate": "smart-i18next-cli generate-translations",
+    "i18n:watch": "smart-i18next-cli watch",
+    "i18n:feature": "smart-i18next-cli create-feature"
   },
   "dependencies": {
-    "@sayyyat/smart-i18n-react": "workspace:*",
     "i18next": "^25.6.2",
     "i18next-browser-languagedetector": "^8.2.0",
-    "i18next-cli": "^1.23.5",
+    "i18next-cli": "^1.24.13",
     "i18next-resources-to-backend": "^1.2.1",
     "next": "16.0.1",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-i18next": "^16.3.5"
   },
   "devDependencies": {
+    "@sayyyat/smart-i18next-cli": "workspace:*",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/node": "^20.19.25",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
