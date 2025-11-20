@@ -53,7 +53,7 @@ program
 program
 .command('generate-translations')
 .description('Translates missing keys via RapidAPI (Costly operation).')
-.option("-l --language <lang>", "Language to translate", "all") // ❗️ <lang> қосылды
+.option("-l --language <lang>", "Language to translate", "all")
 .action(async (options) => {
 	await generateTranslationsCommand({options, opts: program.opts()})
 });
@@ -68,6 +68,8 @@ program
 program
 .command('clean-translations')
 .description('Clean unused translation files')
+.option("-d --dry", "Dry run")
+.option("-p --prune-empty", "Remove empty keys")
 .action(async (options) => {
 	await cleanTranslationsCommand({options, opts: program.opts()})
 });
@@ -106,8 +108,11 @@ function displayCustomHelp() {
 	console.log(chalk.green("\n  generate-types"));
 	console.log("    Generates static types (TNamespace, TAllTranslationKeys).");
 
-	console.log(chalk.green("\n  translate [-l, --language <lang>]"));
+	console.log(chalk.green("\n  generate-translations [-l, --language <lang>]"));
 	console.log("    Translates missing (key == value) keys via RapidAPI.");
+
+	console.log(chalk.green("\n  clean-translations"));
+	console.log("    Clean unused translation files.");
 
 	console.log(chalk.green("\n  help (-h, --help)"));
 	console.log("    Displays this help information.");
