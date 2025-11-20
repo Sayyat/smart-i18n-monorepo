@@ -1,6 +1,6 @@
 {
   "name": "@sayyyat/smart-i18next-cli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Next-generation CLI plugin for i18next-cli, enabling smart auto-translation and type generation in monorepos.",
   "bin": {
     "smart-i18next-cli": "./dist/cli.mjs"
