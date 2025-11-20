@@ -1,25 +1,27 @@
 import { defineConfig } from 'i18next-cli';
-import { SmartI18nPlugin } from '@sayyyat/smart-i18next-cli';
+import { SmartI18nextPlugin } from '@sayyyat/smart-i18next-cli';
 
 export default defineConfig({
 	locales: [
 		"kk",
 		"ru",
 		"en",
+		"fr",
 	],
 	extract: {
-		input: "src/**/*.{js,jsx,ts,tsx}",
+		input: ["src/**/*.{js,jsx,ts,tsx,vue,svelte}"],
 		ignore: "src/i18n/**/*.{js,jsx,ts,tsx}",
 		output: "src/i18n/locales/{{language}}/{{namespace}}.json",
 		primaryLanguage: "en",
 		nsSeparator: false,
 		keySeparator: false,
 		removeUnusedKeys: true,
+		sort: true,
 		defaultValue: (key,namespace, language, value ) => {
-			return value ?? key;
+			return value || key;
 		},
 	},
 	plugins: [
-		SmartI18nPlugin()
+		SmartI18nextPlugin()
 	]
 });
