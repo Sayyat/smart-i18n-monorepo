@@ -18,7 +18,7 @@ export default defineConfig({
 		sort: true,
 		defaultValue: (key,namespace, language, value ) => {
 			console.log({key,namespace, language, value})
-			return key;
+			return value ?? key;
 		},
 	},
 	plugins: [
