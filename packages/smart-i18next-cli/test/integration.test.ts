@@ -10,11 +10,16 @@ const CLI_BIN = path.resolve(__dirname, '../dist/cli.mjs');
 async function runCLI(args: string[]) {
 	console.log(`👉 Running command: smart-i18next-cli ${args.join(' ')}`);
 
-	return execa('node', [CLI_BIN, ...args, '--config', 'i18next.config.ts'], {
+	const result = await execa('node', [CLI_BIN, ...args, '--config', 'i18next.config.ts'], {
 		cwd: TEST_DIR,
-		env: { FORCE_COLOR: '1' },
-		stdio: 'inherit',
+		env: {
+			FORCE_COLOR: '1',
+			CI: 'true'
+		},
 	});
+
+	console.log(result.stdout);
+	return result;
 }
 
 async function readJson(subPath: string) {
@@ -47,7 +52,7 @@ describe('smart-i18next-cli Integration Tests', () => {
 		const profileJson = await readJson('src/i18n/locales/en/features.profile.UserProfile.json');
 		expect(profileJson['Profile Page Title']).toBe('Profile Page Title');
 
-		// Feature 2: TFunction Injection
+		// Feature 2: TFunction
 		const validationJson = await readJson('src/i18n/locales/en/shared.utils.validation.json');
 		expect(validationJson['Validation Error']).toBe('Validation Error');
 
@@ -59,5 +64,4 @@ describe('smart-i18next-cli Integration Tests', () => {
 		const loginJson = await readJson('src/i18n/locales/en/features.auth.Login.json');
 		expect(loginJson['Submit Button']).toBe('Submit Button');
 	});
-
 });
