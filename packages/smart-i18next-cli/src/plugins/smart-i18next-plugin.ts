@@ -30,12 +30,10 @@ const NS_PROP_REGEX = /(\bns\s*=\s*)(?:(["'])([^"']*)\2|(\{)([^}]*)(\}))/;
 
 // 4. REGEX: Updated TFunction Detection (Flexible)
 // Explanation:
-// 1. (... - Start of capture
-// 2. t: TFunction... - The 't' argument with type definition
-// 3. ... ) - End of arguments
-// 4. (?::\s*[^{]+)? - NEW: Matches optional return type definition (e.g., : Promise<string>) before the body
-// 5. \s*(?:=>)?\s*\{ - Start of the function body
-const TFUNCTION_COMPLEX_REGEX = /(\(\s*[^)]*?)(\bt\s*:\s*TFunction(?:\s*<\s*(["'])([^"']+)\3\s*>)?)([^)]*\)\s*(?::\s*[^{]+)?\s*(?:=>)?\s*\{)/g;
+// Group 1: Префикс (': ', 'as ', '= ')
+// Group 2: Quote (", ')
+// Group 3: Namespace ("ns")
+const TFUNCTION_SIMPLE_REGEX = /((?::|as|=)\s*)\bTFunction\s*(?:<\s*(['"`])([^'"`]+)\2\s*>)?/g;
 
 /**
  * Main plugin for 'smart-i18next-cli'.
@@ -84,7 +82,6 @@ export const SmartI18nextPlugin = (
 		 */
 		async onLoad(code: string, filePath: string): Promise<string> {
 			const nativeNs = normalizeNamespacePath(filePath);
-			let needsImportInjection = false;
 
 			// --- 1. Handle useTranslation / getTranslation ---
 			let rewrittenCode = code.replace(NS_USAGE_REGEX, (match, fnName, quote, currentNs) => {
@@ -128,33 +125,18 @@ export const SmartI18nextPlugin = (
 			});
 
 			// --- 3. Handle TFunction (Smart Injection) ---
-			// Transforms: (t: TFunction<"ns">) => { ... }
-			// Into:       (t: TFunction<"ns">) => { const {t} = useTranslation("ns"); ... }
-			rewrittenCode = rewrittenCode.replace(TFUNCTION_COMPLEX_REGEX, (match, beforeT, tArg, quote, currentNs, afterT) => {
-				// Determine target namespace
-				let targetNs = nativeNs;
+			// Transforms: (t: TFunction<"wrong-namespace">) => { ... }
+			// Into:       (t: TFunction<"correct-namespace">) => { ... }
+			rewrittenCode = rewrittenCode.replace(TFUNCTION_SIMPLE_REGEX, (match, prefix, quote, currentNs) => {
 
 				// If a valid namespace is provided in generic, reuse it
 				if (currentNs && validNamespacesSet.has(currentNs)) {
-					targetNs = currentNs;
+					return match;
 				}
 
-				// Inject 'useTranslation' call at the start of the function body.
-				// This tricks the i18next-cli parser into registering the keys for the correct namespace.
-				needsImportInjection = true;
 
-				return `${beforeT}${tArg}${afterT} const {t} = useTranslation("${targetNs}");`;
+				return `${prefix}TFunction<"${nativeNs}">`;
 			});
-
-			// --- 4. Inject Import if needed ---
-			if (needsImportInjection) {
-				// If we injected 'useTranslation', we must ensure it is imported to avoid syntax errors
-				// (though i18next-cli parser might be lenient, it's safer to add it).
-				if (!rewrittenCode.includes('import { useTranslation }') && !rewrittenCode.includes('import {useTranslation}')) {
-					// Assume 'react-i18next' for React projects (or fallback to i18next)
-					rewrittenCode = `import { useTranslation } from 'react-i18next';\n` + rewrittenCode;
-				}
-			}
 
 			// Debugging: View the transformed code
 			// console.log(rewrittenCode)
