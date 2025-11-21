@@ -128,6 +128,11 @@ function displayCustomHelp() {
 }
 
 program.on('command:*', (operands) => {
+	const opts = program.opts();
+	const argsToForward = [...operands];
+	if (opts.config) {
+		argsToForward.push('--config', opts.config);
+	}
 	console.log(chalk.blue(`Forwarding command to '${I18NEXT_CLI_BIN}':`), operands.join(' '));
 
 	const result = spawnSync(
